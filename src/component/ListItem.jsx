@@ -9,7 +9,7 @@ import React from "react";
 
 const ListItemCustom = ({ task, toggleTask, index, deleteTask }) => {
   return (
-    <ListItem dense button>
+    <ListItem dense button sx={{ borderBottom: "1px solid #e5e5e5" }}>
       <Checkbox
         edge="start"
         checked={task.completed}
