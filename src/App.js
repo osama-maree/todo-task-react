@@ -2,6 +2,7 @@ import { Container, List } from "@mui/material";
 import React, { useState } from "react";
 import Title from "./component/Title.jsx";
 import ListItemCustom from "./component/ListItem.jsx";
+import InputAdd from "./component/InputAdd.jsx";
 
 const App = () => {
   const [tasks, setTasks] = useState([
@@ -11,9 +12,8 @@ const App = () => {
   ]);
 
   const [taskText, setTaskText] = useState("");
-
+  const addTask = () => {};
   const toggleTask = (index) => {};
-
   const deleteTask = (index) => {};
   return (
     <Container
@@ -21,7 +21,14 @@ const App = () => {
       sx={{ border: "1px solid #eee", borderRadius: "15px" }}
     >
       <Title title={"Osama-Task"} />
-      <List style={{ marginTop: 5, borderTop: "1px solid green" }}>
+
+      <InputAdd
+        taskText={taskText}
+        setTaskText={setTaskText}
+        addTask={addTask}
+      />
+
+      <List style={{ marginTop: 5,  }}>
         {tasks.map((task, index) => (
           <ListItemCustom
             key={index}
