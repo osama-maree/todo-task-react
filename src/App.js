@@ -5,6 +5,7 @@ import ListItemCustom from "./component/ListItem.jsx";
 import InputAdd from "./component/InputAdd.jsx";
 import AlertCustom from "./component/AlertCustom.jsx";
 import SearchItem from "./component/SearchItem.jsx";
+import Footer from "./component/Footer.jsx";
 const App = () => {
   const [tasks, setTasks] = useState([]);
   const [open, setOpen] = useState(false);
@@ -113,6 +114,7 @@ const App = () => {
               ))}
         </List>
       )}
+      <Footer tasks={tasks} />
     </Container>
   );
 };

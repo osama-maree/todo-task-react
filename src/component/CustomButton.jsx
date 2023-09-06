@@ -1,15 +1,14 @@
 import { Button } from '@mui/material';
 import React from 'react'
 
-const CustomButton = ({type,fun}) => {
+const CustomButton = ({type,dis,text}) => {
   return (
     <Button
       variant="contained"
       color={type}
-      onClick={fun}
-      style={{ marginTop: "10px" }}
+    disabled={dis}
     >
-      Show All
+     {text}
     </Button>
   );
 }
