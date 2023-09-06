@@ -23,15 +23,14 @@ const InputAdd = ({ taskText, setTaskText, addTask }) => {
         }}
         InputProps={{
           startAdornment: (
-            <ListItemSecondaryAction>
-              <InputAdornment position="start">
-                <AddTaskIcon
-                  sx={{
-                    cursor: "pointer",
-                  }}
-                />
-              </InputAdornment>
-            </ListItemSecondaryAction>
+            <InputAdornment position="start">
+              <AddTaskIcon
+                sx={{
+                  cursor: "pointer",
+                }}
+                onClick={() => addTask()}
+              />
+            </InputAdornment>
           ),
         }}
       />
