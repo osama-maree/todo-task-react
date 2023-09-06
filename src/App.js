@@ -21,8 +21,17 @@ const App = () => {
       handleOpen();
     }
   };
-  const toggleTask = (index) => {};
-  const deleteTask = (index) => {};
+  const toggleTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].completed = !updatedTasks[index].completed;
+    setTasks(updatedTasks);
+  };
+  const deleteTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
+    setTasks(updatedTasks);
+  };
+
   return (
     <Container
       maxWidth="sm"
@@ -52,6 +61,7 @@ const App = () => {
         setTaskText={setTaskText}
         addTask={addTask}
       />
+
       <List>
         {tasks.map((task, index) => (
           <ListItemCustom
