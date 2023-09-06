@@ -10,6 +10,7 @@ const Footer = ({ tasks }) => {
         marginBottom: "20px",
         display: "flex",
         justifyContent: "space-evenly",
+        flexWrap: "wrap",
       }}
     >
       <CustomButton

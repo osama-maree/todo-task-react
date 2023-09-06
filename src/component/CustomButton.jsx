@@ -1,16 +1,17 @@
-import { Button } from '@mui/material';
-import React from 'react'
+import { Button } from "@mui/material";
+import React from "react";
 
-const CustomButton = ({type,dis,text}) => {
+const CustomButton = ({ type, dis, text }) => {
   return (
     <Button
-      variant="contained"
+      variant="outlined"
       color={type}
-    disabled={dis}
+      disabled={dis}
+      sx={{ marginTop: "10px" }}
     >
-     {text}
+      {text}
     </Button>
   );
-}
+};
 
-export default CustomButton
+export default CustomButton;

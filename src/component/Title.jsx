@@ -3,7 +3,7 @@ import React from 'react'
 
 const Title = ({title}) => {
   return (
-    <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }} my={5}>
+    <Typography variant="h3" className='small-text' gutterBottom sx={{ textAlign: "center" }} my={5}>
      {title}
     </Typography>
   );
