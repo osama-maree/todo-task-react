@@ -1,22 +1,44 @@
 import { Alert, Container, IconButton, List } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "./component/Title.jsx";
 import ListItemCustom from "./component/ListItem.jsx";
 import InputAdd from "./component/InputAdd.jsx";
-import CloseIcon from "@mui/icons-material/Close";
 import AlertCustom from "./component/AlertCustom.jsx";
+import SearchItem from "./component/SearchItem.jsx";
 const App = () => {
   const [tasks, setTasks] = useState([]);
   const [open, setOpen] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
   const [taskText, setTaskText] = useState("");
-  const handleOpen = () => setOpen((open) => !open);
-  const handleOpenSuccess = () => setOpenSuccess((open) => !open);
+  const [search, setSearch] = useState();
+  const [temp, setTemp] = useState([]);
+  const [hide, setHide] = useState(true);
+  useEffect(() => {
+    if (search) {
+      setTemp(() =>
+        tasks.filter((t) =>
+          t.text.toUpperCase().startsWith(search.toUpperCase())
+        )
+      );
+    } else {
+      setTemp(() => []);
+    }
+  }, [search]);
+  const handleOpen = () => {
+    setOpenSuccess(false);
+    if (open) return;
+    setOpen((open) => !open);
+  };
+  const handleOpenSuccess = () => {
+    setOpen(false);
+    if (openSuccess) return;
+    setOpenSuccess((openSuc) => !openSuc);
+  };
   const addTask = () => {
     if (taskText.trim() !== "") {
       setTasks([...tasks, { text: taskText, completed: false }]);
       setTaskText("");
-      setOpenSuccess((open) => !open);
+      handleOpenSuccess();
     } else {
       handleOpen();
     }
@@ -44,14 +66,14 @@ const App = () => {
       {open && (
         <AlertCustom
           icon={"error"}
-          Open={handleOpen}
+          Open={() => setOpen(false)}
           text={"Please Fill Your Task"}
         />
       )}
       {openSuccess && (
         <AlertCustom
           icon={"success"}
-          Open={handleOpenSuccess}
+          Open={() => setOpenSuccess(false)}
           text={"Added Task"}
         />
       )}
@@ -61,18 +83,36 @@ const App = () => {
         setTaskText={setTaskText}
         addTask={addTask}
       />
-
-      <List>
-        {tasks.map((task, index) => (
-          <ListItemCustom
-            key={index}
-            task={task}
-            toggleTask={toggleTask}
-            deleteTask={deleteTask}
-            index={index}
-          />
-        ))}
-      </List>
+      <SearchItem
+        Tasks={tasks}
+        search={search}
+        setSearch={setSearch}
+        hide={hide}
+        setHide={setHide}
+      />
+      {hide && (
+        <List>
+          {temp.length > 0 || search
+            ? temp.map((task, index) => (
+                <ListItemCustom
+                  key={index}
+                  task={task}
+                  toggleTask={toggleTask}
+                  deleteTask={deleteTask}
+                  index={index}
+                />
+              ))
+            : tasks.map((task, index) => (
+                <ListItemCustom
+                  key={index}
+                  task={task}
+                  toggleTask={toggleTask}
+                  deleteTask={deleteTask}
+                  index={index}
+                />
+              ))}
+        </List>
+      )}
     </Container>
   );
 };
