@@ -31,7 +31,7 @@ const Footer = ({ tasks }) => {
       />
       <CustomButton
         type={"primary"}
-        text={`Success Tasks: ${tasks.length}`}
+        text={`ALl Tasks: ${tasks.length}`}
         dis={tasks.length === 0}
       />
     </Box>
