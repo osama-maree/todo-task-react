@@ -1,13 +1,14 @@
-import { Alert, Container, IconButton, List } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Container, List } from "@mui/material";
+import React, { useEffect, useReducer, useState } from "react";
 import Title from "./component/Title.jsx";
 import ListItemCustom from "./component/ListItem.jsx";
 import InputAdd from "./component/InputAdd.jsx";
 import AlertCustom from "./component/AlertCustom.jsx";
 import SearchItem from "./component/SearchItem.jsx";
 import Footer from "./component/Footer.jsx";
+import tasksReducer from "./component/taskReducer.js";
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, dispatch] = useReducer(tasksReducer, []);
   const [open, setOpen] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
   const [taskText, setTaskText] = useState("");
@@ -37,7 +38,7 @@ const App = () => {
   };
   const addTask = () => {
     if (taskText.trim() !== "") {
-      setTasks([...tasks, { text: taskText, completed: false }]);
+      dispatch({ type: "add", text: taskText, completed: false });
       setTaskText("");
       handleOpenSuccess();
     } else {
@@ -45,14 +46,10 @@ const App = () => {
     }
   };
   const toggleTask = (index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks[index].completed = !updatedTasks[index].completed;
-    setTasks(updatedTasks);
+    dispatch({ type: "toggle", index: index });
   };
   const deleteTask = (index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks.splice(index, 1);
-    setTasks(updatedTasks);
+    dispatch({ type: "delete", index });
   };
 
   return (

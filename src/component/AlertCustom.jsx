@@ -2,7 +2,7 @@ import { Alert, IconButton } from "@mui/material";
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
-const AlertCustom = ({ icon, Open,text }) => {
+const AlertCustom = ({ icon, Open, text }) => {
   return (
     <Alert
       severity={icon}
@@ -19,7 +19,7 @@ const AlertCustom = ({ icon, Open,text }) => {
         </IconButton>
       }
     >
-     {text}
+      {text}
     </Alert>
   );
 };
